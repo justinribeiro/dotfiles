@@ -1,0 +1,15 @@
+/**
+ * @fileoverview Email signature
+ * @author justin.r@stickmanventures.com (Justin Ribeiro)
+ */
+#include <string>
+
+string telephone = "1-415-968-0882"
+string google    = "https://developers.google.com/experts/people/justin-ribeiro"
+string twitter   = "https://twitter.com/justinribeiro"
+string encrypt   = "https://keybase.io/justinribeiro/key.asc"
+
+int main() {
+  // TODO something more clever.
+  return 0;
+}

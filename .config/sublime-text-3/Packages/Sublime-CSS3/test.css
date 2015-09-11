@@ -1,0 +1,627 @@
+.button {
+    display: block;
+    display: inline-block;
+    display: table-column;
+    display: table-row-group;
+    display: table-cell;
+    display: table-row;
+    display: table-header-group;
+    display: table-footer-group;
+    display: table-column-group;
+    display: inline-table;
+    display: table-caption;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    -webkit-transform: translateZ(0);
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-left-radius: 5px;
+    border-image: none;
+    background: linear-gradient(#eaf2f6 0, #e0ebf1 25%, #cfdeea 50%, #b8cfdb 75%, #a8c6d8 100%);
+    box-shadow: inset 0 1px 2px rgba(20, 60, 75, .7), 0 1px 0 rgba(255, 255, 255, .65);
+}
+.background {
+    background-size: cover;
+    background-size: contain;
+    background-attachment: fixed, scroll, local;
+}
+
+input:placeholder, input::-webkit-input-placeholder,
+input::-moz-placeholder, input::placeholder,
+input::selection, input::-moz-selection,
+input:-webkit-autofill,
+input::-webkit-search-cancel-button,
+input::-webkit-search-decoration,
+input::-moz-focus-inner,
+input::-ms-browse,
+input::-ms-check,
+input::-ms-clear,
+input::-ms-expand,
+input::-ms-fill,
+input::-ms-fill-lower,
+input::-ms-fill-upper,
+input::-ms-reveal,
+input::-ms-thumb,
+input::-ms-ticks-after,
+input::-ms-ticks-before,
+input::-ms-tooltip,
+input::-ms-track,
+input::-ms-value {
+    -webkit-text-fill-color: initial;
+}
+.button-name {
+    -webkit-mask-image: -webkit-linear-gradient(left, #000 0, #000 80%, rgba(0,0,0,0) 100%);
+}
+
+.transition-test {
+    transition: 0;
+    transition-delay: 0;
+    transition-timing-function: 0;
+    transition-duration: 0;
+    transition-property: 0;
+}
+.transform-test {
+    transform: rotate(30deg);
+    transform-origin: 100% 100%;
+    transform-origin-y: 1;
+    transform-origin-x: 1;
+}
+.perspective-test {
+    perspective: 500px;
+    perspective-origin: 50% 50%;
+}
+.image-set {
+    background-image: -webkit-image-set( url('logo.png') 1x, url('logo@2x.png') 2x);
+}
+.smoothing-test {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+.unset-test {
+    all: unset;
+    all: initial;
+    all: inherit;
+}
+
+.flex-test {
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -ms-inline-flexbox;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -webkit-inline-flex;
+    display: inline-flex;
+    display: flex;
+    flex-direction: column;
+    flex-direction: row;
+
+    justify-content: flex-start;
+    flex-wrap: wrap-reverse;
+    flex-flow: row wrap;
+    flex: 2 0 0;
+    -moz-box-direction: normal;
+    -moz-box-pack: start;
+    -moz-box-orient: horizontal;
+    -moz-box-align: start;
+    -ms-flex-pack: start;
+    -ms-flex-line-pack: stretch;
+    -ms-flex-align: start;
+    -webkit-align-items: flex-end;
+    -webkit-align-content: stretch;
+    -webkit-align-self: flex-start;
+    -webkit-flex: 2 0 0;
+    -webkit-flex-wrap: wrap;
+    -webkit-flex-flow: row wrap;
+    -webkit-flex-direction: column;
+    -webkit-flex-direction: column-reverse;
+    -webkit-flex-direction: row;
+    -webkit-flex-direction: row-reverse;
+    -webkit-justify-content: flex-start;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: start;
+    -webkit-box-align: start;
+    align-content: stretch;
+    align-self: flex-start;
+    align-items: flex-end;
+
+    -webkit-box-ordinal-group: 1;
+    -moz-box-ordinal-group: 1;
+    -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
+    -webkit-box-flex: 0;
+    -moz-box-flex: 0;
+    -ms-flex-item-align: auto;
+}
+keygen,main,math,menuitem,picture,source,svg,template,track {
+    /**/
+}
+
+
+.weird-or-rare {
+    font-effect: 1;
+    font-emphasize: 1;
+    font-emphasize-position: 1;
+    font-emphasize-style: 1;
+    outline-offset: 1;
+    text-emphasis: 1;
+    text-emphasis-color: 1;
+    text-emphasis-style: 1;
+    text-emphasis-position: 1;
+    text-align-last: 1;
+    tab-size: 1;
+    -ms-writing-mode: rtl;
+    word-break: 1;
+}
+
+/* http://www.w3.org/TR/css3-values/ */
+.css3-units {
+    width: 1.0vw;
+    width: 2.7vh;
+    width: 3vmin;
+    width: 4vmax;
+    transform: rotate(0.25turn);
+    transition: 0.2ms all;
+    width: calc(100px - 1px);
+    width: calc(100% + 3px);
+    width: calc(100%/3 - 2*1em - 2*1px);
+    width: calc((-50vh + 72px)/2 + 24px - 46px);
+}
+@media (min-resolution: 50dppx),
+       (-o-min-device-pixel-ratio: 5/4),
+       (-webkit-min-device-pixel-ratio: 2),
+       (min-device-pixel-ratio: 2),
+       (min--moz-device-pixel-ratio: 2),
+       (min-resolution: 2dppx){}
+
+@-webkit-keyframes name-animation, name-animation2{}
+@-moz-keyframes name-animation, name-animation2{}
+@-o-keyframes name-animation, name-animation2{}
+@keyframes name-animation, name-animation2 {
+    5% { text-align: center; }
+    to { text-align: center; }
+}
+
+/* next @-rules should be colored
+*/@media{}@font-face{}@keyframes t{}
+@media(min-resolution: 50dppx)
+{}
+@keyframes newlinetest
+{
+    from { text-align: center; }
+    to { text-align: center; }
+}
+
+/*deprecated*/
+:root {
+    var-c: #06c;
+    var-main-color: #06c;
+    var-MAIN-COLOR: red;
+    var-accent-background: linear-gradient(to top, var(--main-color), white);
+}
+/*new syntax*/
+:root {
+    --main-color: #c06;
+    --accent-background: linear-gradient(to top, var(--main-color), white);
+}
+#foo h1 {
+    var-gap: 20; /*deprecated*/
+    --gap: 20;
+    margin-top: calc(var(--gap) * 1px);
+    color: var(--theme-colour-1);
+    margin: var(--spacing) calc(var(--spacing) * 2);
+    padding: calc(var(--spacing) / 2) 0;
+    border-bottom: 1px dotted var(--theme-colour-3);
+    margin: 0 0 calc(var(--flow-space, 0) * 1rem) 0;
+    padding: 0 calc(var(--foo, red, blue) * .5rem);
+}
+
+/* http://www.w3.org/TR/selectors4/#overview */
+:not(.active, .visible),
+:matches(.active, .visible),
+
+:dir(ltr),
+:lang(zh, *-hant),
+
+:any-link,
+:local-link,
+:local-link(1),
+:scope,
+
+:current(p, li, dt, dd),
+:past,
+:future,
+
+:indeterminate,
+:default,
+:in-range, :out-of-range,
+:required, :optional,
+:read-only, :read-write,
+
+/* missing from level 3 */
+:empty
+:only-child
+:first-of-type,
+:nth-of-type,
+:last-of-type,
+:nth-last-of-type(2),
+:only-of-type,
+
+:nth-match(.active),
+:nth-last-match(.active),
+
+:column(),
+:nth-column(1),
+:nth-last-column(2),
+
+:valid-drop-target,
+:active-drop-target,
+/* association by 'for' attribute */
+label:matches(:hover, :focus) /for/ input,
+/* association by containment */
+label:matches(:hover, :focus):not([for]) input,
+ul! li:hover,
+col.selected || td,
+:placeholder-shown,
+:user-error {}
+dialog::backdrop{}
+
+/* http://dev.w3.org/csswg/css-will-change/ */
+.will-change {
+    will-change: scroll-position, contents, opacity;
+}
+
+.animation-and-easing {
+    animation: ease, ease-in-out, ease-in, ease-out;
+    animation-name: somerandomname;
+    animation-fill-mode: forwards, both, backwards, none;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    animation-delay: 1s;
+    animation-direction: alternate, alternate-reverse, reverse;
+    animation-play-state: paused, running;
+    animation-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1),
+        step-start, step-end, steps(start, end);
+}
+
+.new-ellipsis {
+    -webkit-line-clamp: 3;
+    overflow-wrap: break-word;
+}
+
+.animatable-properties {
+    transition-property:
+        all,
+        background,
+        background-color,
+        background-image,
+        background-position,
+        background-size,
+        border,
+        border-color,
+        border-radius,
+        border-spacing,
+        border-bottom,
+        border-left,
+        border-right,
+        border-top,
+        border-bottom-left-radius,
+        border-radius,
+        border-width,
+        border-bottom-color,
+        border-left-color,
+        border-right-color,
+        border-top-color,
+        border-bottom-width,
+        border-left-width,
+        border-right-width,
+        border-top-width,
+        bottom,
+        box-shadow,
+        clip,
+        color,
+        crop,
+        filter,
+        font,
+        font-size-adjust,
+        font-size,
+        font-stretch,
+        font-weight,
+        height,
+        left,
+        letter-spacing,
+        line-height,
+        margin-bottom,
+        margin-left,
+        margin-right,
+        margin-top,
+        margin,
+        max-height,
+        max-lines,
+        max-width,
+        min-height,
+        min-width,
+        offset-after,
+        offset-before,
+        offset-end,
+        offset-start,
+        opacity,
+        outline-color,
+        outline-offset,
+        outline-width,
+        padding-bottom,
+        padding-left,
+        padding-right,
+        padding-top,
+        padding,
+        right,
+        text-decoration-color,
+        text-emphasis-color,
+        text-indent,
+        text-shadow,
+        text-size-adjust,
+        top,
+        vertical-align,
+        visibility,
+        width,
+        word-spacing,
+        z-index,
+        zoom,
+        columns,
+        column-count,
+        column-gap,
+        column-rule,
+        column-rule-color,
+        column-rule-width,
+        column-width,
+        flex,
+        flex-grow,
+        flex-shrink,
+        flex-basis,
+        order,
+        perspective,
+        perspective-origin,
+        transform,
+        transform-origin,
+        fill,
+        fill-opacity,
+        flood-color,
+        lighting-color,
+        marker-offset,
+        shape-image-threshold,
+        shape-margin,
+        shape-outside,
+        stop-color,
+        stop-opacity,
+        stroke,
+        stroke-dasharray,
+        stroke-dashoffset,
+        stroke-miterlimit,
+        stroke-opacity,
+        stroke-width,
+        viewport-fill,
+        viewport-fill-opacity;
+}
+
+/* http://www.w3.org/TR/css-shapes-1/ */
+.css-shapes {
+    shape-outside:
+        url('path/to/image-with-shape.png'),
+        polygon(0 0, 100% 100%, 0 100%),
+        inset(50% 50% 50% 50%),
+        inset(0 round 100px) margin-box,
+        ellipse(nonzero, farthest-side at left bottom) border-box,
+        ellipse(evenodd, at left bottom) border-box,
+        circle(250px at 50% 50%) padding-box,
+        circle(closest-side at center) content-box;
+    shape-image-threshold: 0.1;
+    shape-margin: 10px;
+}
+
+/* http://www.w3.org/TR/compositing-1/ */
+.compositing {
+    mix-blend-mode: color-burn, color-dodge, color,
+        darken, difference, exclusion,
+        hard-light,hue, lighten, multiply,
+        overlay, saturation, screen, soft-light;
+    background-blend-mode: luminosity;
+    isolation: isolate;
+}
+
+/* http://www.w3.org/TR/css-masking/ */
+.css-masking {
+    clip-path: fill-box, stroke-box, view-box;
+    clip-rule: nonzero, evenodd;
+
+    mask: url(resources.svg#mask2);
+    mask-border-mode: luminance;
+    mask-border-outset: 0;
+    mask-border-repeat: stretch;
+    mask-border-slice: 0;
+    mask-border-source: url(mask.png);
+    mask-border-width: auto;
+    mask-border: 25 fill round;
+    mask-clip: no-clip;
+    mask-composite: add, exclude, intersect, subtract;
+    mask-image: url(resources.svg#mask2);
+    mask-mode: alpha;
+    mask-origin: view-box;
+    mask-position: 100% 100%;
+    mask-repeat: round space;
+    mask-size: border-box;
+    mask-type: luminance;
+}
+
+/* http://www.w3.org/TR/css-grid-1/ */
+.css3-grid {
+    display: grid;
+    display: inline-grid;
+    display: subgrid;
+    grid-template: none;
+    /* repeat and minmax should be highlighted as function */
+    grid-template-columns: repeat(4, 10px (col-start) 250px (col-end)) 10px;
+    grid-template-rows: auto minmax(min-content, 1fr) auto;
+    grid-template-areas: "logo content"
+                         "aside content";
+    grid-area: b;
+    grid-column: 1;
+    grid-column-end: end;
+    grid-column-start: start;
+    grid-row: 1 / span 2;
+    grid-row-end: 4;
+    grid-row-start: 1;
+    grid-auto-columns: auto;
+    grid-auto-flow: column;
+    grid-auto-flow: dense;
+    grid-auto-flow: row;
+    grid-auto-flow: stack;
+    grid-auto-rows: auto;
+}
+
+/* http://dev.w3.org/csswg/mediaqueries/ */
+@custom-media --narrow-window (max-width: 30em);
+@media (--narrow-window) and (script) { ... }
+
+@media (device-width < 800px) { ... }
+@media (resolution >= 2dppx) { ... }
+@media (update-frequency: none) { ... }
+@media (update-frequency: slow) { ... }
+@media (update-frequency: normal) { ... }
+@media (overflow-block: none) { ... }
+@media (overflow-block: scroll) { ... }
+@media (overflow-block: optional-paged) { ... }
+@media (overflow-block: paged) { ... }
+@media (overflow-inline: none) { ... }
+@media (overflow-inline: scroll) { ... }
+@media (color >= 8) { ... }
+@media (color-index >= 1) { ... }
+@media (pointer:coarse) { ... }
+@media (pointer:fine) {
+@media (any-pointer:coarse) { ... }
+@media (any-pointer:fine) {
+
+@media (hover:hover) { ... }
+@media (hover:on-demand) { ... }
+@media (any-hover:hover) { ... }
+@media (any-hover:on-demand) { ... }
+
+@media (light-level: normal) { ... }
+@media (light-level: dim) { ... }
+@media (light-level: washed) { ... }
+
+@media (scripting:initial-only) { ... }
+@media (scripting:enabled) { ... }
+
+/* http://www.w3.org/TR/css3-fonts/ */
+/* @font-feature-values support not implemented */
+.css3-fonts {
+    font: normal;
+    font-stretch:
+        ultra-condensed, extra-condensed, condensed, semi-condensed,
+        semi-expanded, expanded, extra-expanded, ultra-expanded;
+    font-synthesis: none;
+    font-feature-settings: "liga", "dlig", "tnum", 'hist';
+    font-language-override: "SRB";
+    font-variant-ligatures: common-ligatures, no-common-ligatures,
+        discretionary-ligatures, no-discretionary-ligatures,
+        historical-ligatures, no-historical-ligatures,
+        contextual, no-contextual;
+    font-variant-position: sub, super;
+    font-kerning: normal;
+    font-variant-caps:
+        small-caps, all-small-caps,
+        petite-caps, all-petite-caps,
+        unicase, titling-caps;
+    font-variant-numeric:
+        lining-nums, oldstyle-nums, proportional-nums, tabular-nums,
+        diagonal-fractions, stacked-fractions,
+        ordinal, slashed-zero;
+    /* partially hightlighted */
+    font-variant-alternates: historical-forms,
+        stylistic(<feature-value-name>),
+        styleset(<feature-value-name> #),
+        character-variant(<feature-value-name> #),
+        swash(<feature-value-name>),
+        ornaments(<feature-value-name>),
+        annotation(<feature-value-name>);
+    font-variant-east-asian:
+        jis78, jis83, jis90, jis04,
+        simplified, traditional,
+        full-width, proportional-width, ruby;
+    unicode-range: U+416, U+400-4ff, U+4??;
+}
+
+/* http://dev.w3.org/csswg/css-inline/ */
+.css3-inline-layout {
+    text-height: font-size, text-size, max-size;
+    line-box-contain: glyphs, replaced, inline-box;
+    line-stacking-strategy: inline-line-height,
+        block-line-height, max-height, grid-height;
+    line-stacking-ruby: exclude-ruby, include-ruby;
+    line-stacking-shift: consider-shifts, disregard-shifts;
+    line-stacking: exclude-ruby disregard-shifts;
+    dominant-baseline: use-script, no-change, reset-size,
+        alphabetic, hanging, ideographic, mathematical,
+        central, middle, text-under-edge, text-over-edge;
+    alignment-baseline: baseline, use-script, over-edge,
+        text-over-edge, under-edge, text-under-edge, central,
+        middle, ideographic, alphabetic, hanging, mathematical;
+    alignment-adjust: auto;
+    baseline-shift: super;
+    inline-box-align: last;
+    initial-letter: 1 3;
+    initial-letter-align: alphabetic, hanging, ideographic;
+}
+
+/* http://www.w3.org/TR/css3-images/ */
+/* http://dev.w3.org/csswg/css-images-3/ */
+@media (min-resolution: 1dpi) {}
+@media (min-resolution: 1dpcm) {}
+@media (min-resolution: 1dppx) {}
+.css3-images {
+    background-image:
+        image('sprites.svg#xywh=40,0,20,20'),
+        image("wavy.svg", 'wavy.png' , "wavy.gif"),
+        image(rgba(0,0,255,.5)), url("bg.png");
+    background-image: image-set("1x.png" 1x, "2x.png" 2x, "print.png" 600dpi);
+    background-image: cross-fade(50% url("pic1.png"), url("pic2.png"));
+    background-image:
+        linear-gradient(to top, blue, yellow),
+        linear-gradient(to bottom, yellow 0%, blue 100%),
+        linear-gradient(135deg, yellow, blue);
+    background-image:
+        radial-gradient(5em circle at top left, yellow, blue),
+        radial-gradient(circle, #006, white 100%),
+        radial-gradient(ellipse, #006, white 100%),
+        radial-gradient(farthest-corner at 50% 50%, yellow, green),
+        radial-gradient(closest-corner at 50% 50%, yellow, green),
+        radial-gradient(farthest-side at 50% 50%, yellow, green),
+        radial-gradient(closest-side at 50% 50%, yellow, green);
+    background-image:
+        repeating-linear-gradient(red, blue 20px, red 40px),
+        repeating-radial-gradient(circle closest-side at 20px 30px, red, yellow, green 100%, yellow 150%, red 200%);
+
+    object-fit: fill, contain, cover, none, scale-down;
+    object-position: 50% 50%;
+    image-orientation: from-image 90deg flip;
+    image-resolution: 300dpi snap;
+    image-resolution: snap from-image;
+    image-rendering: crisp-edges, pixelated;
+}

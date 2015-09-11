@@ -1,0 +1,34 @@
+{
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AutoFileName",
+		"Autoprefixer",
+		"Color Highlighter",
+		"ColorPicker",
+		"DocBlockr",
+		"FixMyJS",
+		"GitGutter",
+		"JavaScriptNext - ES6 Syntax",
+		"jQuery",
+		"JSCS-Formatter",
+		"JSHint Gutter",
+		"Package Control",
+		"Polymer & Web Component Snippets",
+		"Pretty JSON",
+		"Sass",
+		"StringEncode",
+		"Sublime-CSS3",
+		"SublimeLinter",
+		"SublimeLinter-jscs",
+		"SublimeLinter-jshint",
+		"SublimeLinter-php",
+		"Theme - Cobalt2"
+	],
+	"repositories":
+	[
+		"https://github.com/i-akhmadullin/Sublime-CSS3"
+	]
+}
