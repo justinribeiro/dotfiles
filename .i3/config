@@ -66,11 +66,9 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
-bindsym $mod+h split h
-
-# split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+h split horizontal; mark lastsplit
+bindsym $mod+v split vertical; mark lastsplit
+bindsym $mod+m move window to mark lastsplit
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -167,14 +165,19 @@ bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%
 bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
 
+bindsym --release Print exec "shutter -f"
+bindsym --release $mod+Print exec "shutter -s"
+bindsym --release $mod+Shift+Print exec "shutter -r"
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
         status_command i3status
 }
 
-#exec --no-startup-id xsetroot -solid "#333333"
-exec  --no-startup-id feh --bg-scale ~/Pictures/photo-1428550670225-15f007f6f1ba.jpg
+#exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.i3/workspace-1.json'"
+
 exec xrandr --output DP-0 --mode 4096x2160
+exec  --no-startup-id feh --bg-scale ~/Pictures/alone-on-rock.jpg
 exec xmodmap ~/.Xmodmap
 exec xhost local:root

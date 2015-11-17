@@ -17,12 +17,12 @@
                "x": 2,
                "y": 24
             },
-            "name": "Inbox (3) - justin.ribeiro@stickmanventures.com - Stickman Ventures, Inc. Mail - Google Chrome",
+            "name": "Inbox - justin.ribeiro@stickmanventures.com - Stickman Ventures, Inc. Mail - Google Chrome",
             "percent": 0.5,
             "swallows": [
                {
-               // "class": "^Google\\-chrome$",
-               // "instance": "^Google\\-chrome$",
+               "class": "^Google\\-chrome$",
+               "instance": "^Google\\-chrome$"
                // "title": "^Inbox\\ \\(3\\)\\ \\-\\ justin\\.ribeiro\\@stickmanventures\\.com\\ \\-\\ Stickman\\ Ventures\\,\\ Inc\\.\\ Mail\\ \\-\\ Google\\ Chrome$",
                // "transient_for": "^$",
                // "window_role": "^browser$"
@@ -44,8 +44,8 @@
             "percent": 0.5,
             "swallows": [
                {
-               // "class": "^Google\\-chrome$",
-               // "instance": "^Google\\-chrome$",
+               "class": "^Google\\-chrome$",
+	       "instance": "^Google\\-chrome$"
                // "title": "^Inbox\\ \\–\\ justin\\.david\\.ribeiro\\@gmail\\.com\\ \\-\\ Google\\ Chrome$",
                // "transient_for": "^$",
                // "window_role": "^browser$"
@@ -70,8 +70,8 @@
     "percent": 0.333333333333333,
     "swallows": [
        {
-       // "class": "^Google\\-chrome$",
-       // "instance": "^Google\\-chrome$",
+       "class": "^Google\\-chrome$",
+       "instance": "^Google\\-chrome$"
        // "title": "^general\\ \\|\\ Team\\ Stickman\\ Slack\\ \\-\\ Google\\ Chrome$",
        // "transient_for": "^$",
        // "window_role": "^browser$"
@@ -102,8 +102,8 @@
             "percent": 0.5,
             "swallows": [
                {
-               // "class": "^Google\\-chrome$",
-               // "instance": "^crx_knipolnnllmklapflnccelgolnpehhpl$",
+               "class": "^Google\\-chrome$",
+               "instance": "^crx_knipolnnllmklapflnccelgolnpehhpl$"
                // "title": "^Hangouts\\ \\-\\ justin\\.david\\.ribeiro\\@gmail\\.com$",
                // "transient_for": "^$",
                // "window_role": "^app$"
@@ -125,8 +125,8 @@
             "percent": 0.5,
             "swallows": [
                {
-               // "class": "^Google\\-chrome$",
-               // "instance": "^crx_hfbikaejeiilikhlldnfbecpkbicmndn$",
+               "class": "^Google\\-chrome$",
+               "instance": "^crx_hfbikaejeiilikhlldnfbecpkbicmndn$"
                // "title": "^Switch$",
                // "transient_for": "^$",
                // "window_role": "^app$"
