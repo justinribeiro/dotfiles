@@ -53,7 +53,16 @@ plugins=(git bower docker gem history npm pip sublime ssh-agent ubuntu systemd e
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/justinribeiro/.local/bin:/home/justinribeiro/.local/Android/Sdk/platform-tools"
+export GOPATH=$HOME/.local
+
+# lolcommits
+export LOLCOMMITS_DEVICE="/dev/video0"
+#export LOLCOMMITS_ANIMATE=5
+export LOLCOMMITS_FORK=true
+export LOLCOMMITS_STEALTH=true
+export LOLCOMMITS_DIR="/home/justinribeiro/Documents/google-drive/me/lolcommits"
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -82,16 +91,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 
 source $ZSH/custom/aliases.zsh
-
-
-
-#alias zshconfig="nano ~/.zshrc"
-#alias ohmyzsh="nano ~/.oh-my-zsh"
-#alias i3config="nano ~/.i3/config"
-#alias google-chrome-scale="google-chrome --force-device-scale-factor=1.2"
-#alias zshrestart=". ~/.zshrc"
-#alias dbeaver="~/.local/bin/dbeaver/dbeaver"
-
 
 # The next line updates PATH for the Google Cloud SDK.
 source '/home/justinribeiro/.local/bin/google-cloud-sdk/path.zsh.inc'
