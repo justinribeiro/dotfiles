@@ -1,0 +1,123 @@
+{
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.5,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 2134,
+               "width": 2046,
+               "x": 1,
+               "y": 1
+            },
+            "name": "Visual Studio Code",
+            "percent": 0.8,
+            "swallows": [
+               {
+               "class": "^Code$",
+               "instance": "^code$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "pixel",
+            "floating": "auto_off",
+            "layout": "splith",
+            "percent": 0.2,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "pixel",
+                    "current_border_width": 1,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 482,
+                       "width": 802,
+                       "x": 0,
+                       "y": 0
+                    },
+                    "marks": [
+                       "lastsplit"
+                    ],
+                    "name": "~",
+                    "percent": 0.333333333333333,
+                    "swallows": [
+                       {
+                       "class": "^Gnome\\-terminal$",
+                       "instance": "^gnome\\-terminal\\-server$"
+                       }
+                    ],
+                    "type": "con"
+                },
+                {
+                    "border": "pixel",
+                    "current_border_width": 1,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 482,
+                       "width": 802,
+                       "x": 0,
+                       "y": 0
+                    },
+                    "name": "~",
+                    "percent": 0.333333333333333,
+                    "swallows": [
+                       {
+                       "class": "^Gnome\\-terminal$",
+                       "instance": "^gnome\\-terminal\\-server$"
+                       }
+                    ],
+                    "type": "con"
+                },
+                {
+                    "border": "pixel",
+                    "current_border_width": 1,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 482,
+                       "width": 802,
+                       "x": 0,
+                       "y": 0
+                    },
+                    "name": "~",
+                    "percent": 0.333333333333333,
+                    "swallows": [
+                       {
+                       "class": "^Gnome\\-terminal$",
+                       "instance": "^gnome\\-terminal\\-server$"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
+        }
+    ]
+}
+
+{
+    "border": "pixel",
+    "current_border_width": 1,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 2134,
+       "width": 1022,
+       "x": 1035,
+       "y": 11
+    },
+    "name": "Google Chrome",
+    "percent": 0.5,
+    "swallows": [
+       {
+       "class": "^Google\\-chrome$",
+       "instance": "^google\\-chrome$"
+       }
+    ],
+    "type": "con"
+}
+

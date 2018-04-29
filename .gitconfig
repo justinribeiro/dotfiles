@@ -1,0 +1,71 @@
+[user]
+  email = justin@justinribeiro.com
+  name = Justin Ribeiro
+
+[alias]
+  branch-name = "!git rev-parse --abbrev-ref HEAD"
+  a = "add"
+  aa = "add --all"
+	c = "commit -v"
+	undo = "!git reset HEAD~1 --mixed"
+	gp = "!git push -u origin $(git branch-name)"
+	rb = "!git rebase -i `git merge-base master HEAD`"
+	cl = "clone --recursive"
+	cb = "checkout -b"
+  co = "checkout"
+	cm = "checkout master"
+	cd = "checkout develop"
+	up = "pull --rebase -v"
+	bsup = "!git branch --set-upstream-to=origin/$(git branch-name)"
+	sb = "status -sb"
+	sta = "stash save"
+	stp = "stash pop"
+	stc = "stash clear"
+	sts = "stash show --text"
+  pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+  pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+	pristine = "!git reset --hard && git clean -dfx"
+
+	# via Rob: https://gist.github.com/robmiller/6018582
+	delete-merged-branches = "!git co master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+
+	# via Jessie: https://github.com/jessfraz/dotfiles/blob/master/.gitconfig
+	graph = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
+
+[apply]
+	# Detect whitespace errors when applying a patch
+	whitespace = fix
+
+[core]
+	editor = vim
+
+[commit]
+  gpgsign = true
+
+[gpg]
+	program = gpg2
+
+[merge]
+	tool = kdiff3
+
+[diff]
+	guitool = kdiff3
+
+[difftool "kdiff3"]
+	trustExitCode = false
+
+[url "git@github.com:"]
+	pushInsteadOf = https://github.com/
+	pushInsteadOf = "github:"
+	pushInsteadOf = "git://github.com/"
+
+[url "git://github.com/"]
+	insteadOf = "github:"
+
+[url "git@gist.github.com:"]
+	insteadOf = "gst:"
+	pushInsteadOf = "gist:"
+	pushInsteadOf = "git://gist.github.com/"
+
+[url "git://gist.github.com/"]
+	insteadOf = "gist:"

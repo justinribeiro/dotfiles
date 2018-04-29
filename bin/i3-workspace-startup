@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Workspace 1
+/home/justinribeiro/.local/bin/i3-workspace-restore-comms
+
+# Workspace 3
+/home/justinribeiro/.local/bin/i3-workspace-restore-code

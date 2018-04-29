@@ -1,0 +1,21 @@
+#!/bin/sh
+
+i3-msg "workspace 1; append_layout .i3/workspace-1.json"
+#i3-msg "workspace 1; append_layout .i3/workspace-3.json"
+
+# start inboxes
+google-chrome --profile-directory='Profile 1' --app='https://inbox.google.com'
+google-chrome --profile-directory='Profile 2' --app='https://inbox.google.com'
+google-chrome --profile-directory='Default' --app='https://inbox.google.com'
+
+# start chat
+google-chrome --profile-directory='Profile 1' --app='https://chat.stickmanventures.com'
+
+# start calendars
+google-chrome --profile-directory='Profile 1' --app='https://calendar.google.com'
+google-chrome --profile-directory='Default' --app='https://calendar.google.com'
+
+# start comms
+signal-desktop > /dev/null 2>&1 &
+google-chrome --profile-directory='Profile 1' --app-id='hfbikaejeiilikhlldnfbecpkbicmndn'
+keypassxc > /dev/null 2>&1 &
