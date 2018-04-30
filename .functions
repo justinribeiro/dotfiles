@@ -1,0 +1,169 @@
+gpg-agent-start() {
+  # Enable gpg-agent if it is not running-
+  # --use-standard-socket will work from version 2 upwards
+  AGENT_SOCK=`gpgconf --list-dirs | grep agent-socket | cut -d : -f 2`
+
+  if [ ! -S ${AGENT_SOCK} ]; then
+    gpg-agent --daemon --use-standard-socket >/dev/null 2>&1
+  fi
+  export GPG_TTY=$(tty)
+
+  # Set SSH to use gpg-agent if it's enabled
+  if [ -S "${AGENT_SOCK}.ssh" ]; then
+    export SSH_AUTH_SOCK="${AGENT_SOCK}.ssh"
+    unset SSH_AGENT_PID
+  fi
+}
+
+# gets unruly on certain machines
+gpg-agent-restart() {
+  gpgconf --kill gpg-agent
+  gpg-agent-start
+}
+
+generateEddystoneUID() {
+  echo -n $1 | sha256sum | cut -b-10 | tr -d \\n | xxd -pu | xargs -I{} printf '%s%s' {} `od -vAn -N6 -tx2 < /dev/urandom | tr -d ' '`
+}
+
+generateCalPower() {
+  echo "ibase=10; obase=2; $1" | BC_LINE_LENGTH=9999 bc | awk '{ printf "%08d\n", $0 }' | tr 01 10 | xargs -I{} expr $2 + {} | xargs -I{} echo 'ibase=2; obase=10000; {}' | bc
+}
+
+add-wpp-base() {
+  mid3v2 -D $@
+  mid3v2 --TALB 'The Web Platform Podcast' --TCOM 'The Web Platform Podcast' --TCON 'Other' --TCOP 'The Web Platform Podcast 2016' --TDES 'The Web Platform Podcast is a developer discussion that dives deep into  all things  web. We discuss everything from developing for mobile to building HDTV software. From wearables & robotics to user experience & mentoring, we bring to our listeners everything related to building products & services for The Web Platform of today, tomorrow, and beyond.' --TGID 'http://www.thewebplatformpodcast.com' --TYER '2016' $@
+}
+
+calc() {
+	local result=""
+	result="$(printf "scale=10;%s\\n" "$*" | bc --mathlib | tr -d '\\\n')"
+	#						└─ default (when `--mathlib` is used) is 20
+
+	if [[ "$result" == *.* ]]; then
+		# improve the output for decimal numbers
+		# add "0" for cases like ".5"
+		# add "0" for cases like "-.5"
+		# remove trailing zeros
+		printf "%s" "$result" |
+			sed -e 's/^\./0./'  \
+			-e 's/^-\./-0./' \
+			-e 's/0*$//;s/\.$//'
+	else
+		printf "%s" "$result"
+	fi
+	printf "\\n"
+}
+
+# Because I like dates in my filenames
+insert-datestamp() {
+  LBUFFER+=${(%):-'%D{%Y-%m-%d}'};
+}
+zle -N insert-datestamp
+bindkey '^I^Y' insert-datestamp
+
+screenrec-fullscreen() {
+  local path="$HOME/Documents/google-drive/me/screenrecording"
+  ffmpeg -video_size 4096x2160 -framerate 30 -f x11grab -i :0.0 -c:v libx264 -qp 0 -preset ultrafast $path/$@.mkv
+}
+
+# top left for i3 on 50/50 50/50 split
+screenrec-quarter() {
+  ffmpeg -video_size 2048x1080 -framerate 120 -f x11grab -i :0.0 -c:v libx264 -qp 0 -preset ultrafast $HOME/Documents/google-drive/me/screenrecording/$@.mkv
+}
+
+# Open image nicely in feh
+openimage() {
+	local file
+	file=$@
+
+	feh -q --auto-zoom \
+		--sort filename --borderless \
+		--scale-down --draw-filename \
+		--image-bg black \
+		"$file"
+}
+
+# Create a new directory and enter it
+mkd() {
+	mkdir -p "$@"
+	cd "$@" || exit
+}
+
+# Make a temporary directory and enter it
+tmpd() {
+	local dir
+	if [ $# -eq 0 ]; then
+		dir=$(mktemp -d)
+	else
+		dir=$(mktemp -d -t "${1}.XXXXXXXXXX")
+	fi
+	cd "$dir" || exit
+}
+
+zshrestart() {
+  local cache=$ZSH_CACHE_DIR
+  autoload -U compinit zrecompile
+  compinit -d "$cache/zcomp-$HOST"
+
+  for f in ~/.zshrc "$cache/zcomp-$HOST"; do
+    zrecompile -p $f && command rm -f $f.zwc.old
+  done
+
+  source ~/.zshrc
+}
+
+zsh_stats_ignore() {
+ fc -l 1 | awk '{CMD[$2]++;count++;}END {for (a in CMD) if(a != "ll" && a != "ls" && a != "nano" && a != "sudo" && a != ".." && a != "rm" && a != "cd" && a != "exit"){ print CMD[a] " " CMD[a]/count*100 "% " a;}}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n10
+}
+
+# Call from a local repo to open the repository on github/bitbucket in browser
+# Modified version of https://github.com/zeke/ghwd
+repo() {
+	# Figure out github repo base URL
+	local base_url
+	base_url=$(git config --get remote.origin.url)
+	base_url=${base_url%\.git} # remove .git from end of string
+
+	# Fix git@github.com: URLs
+	base_url=${base_url//git@github\.com:/https:\/\/github\.com\/}
+
+	# Fix git://github.com URLS
+	base_url=${base_url//git:\/\/github\.com/https:\/\/github\.com\/}
+
+	# Fix git@bitbucket.org: URLs
+	base_url=${base_url//git@bitbucket.org:/https:\/\/bitbucket\.org\/}
+
+	# Fix git@gitlab.com: URLs
+	base_url=${base_url//git@gitlab\.com:/https:\/\/gitlab\.com\/}
+
+	# Validate that this folder is a git folder
+	if ! git branch 2>/dev/null 1>&2 ; then
+		echo "Not a git repo!"
+		exit $?
+	fi
+
+	# Find current directory relative to .git parent
+	full_path=$(pwd)
+	git_base_path=$(cd "./$(git rev-parse --show-cdup)" || exit 1; pwd)
+	relative_path=${full_path#$git_base_path} # remove leading git_base_path from working directory
+
+	# If filename argument is present, append it
+	if [ "$1" ]; then
+		relative_path="$relative_path/$1"
+	fi
+
+	# Figure out current git branch
+	# git_where=$(command git symbolic-ref -q HEAD || command git name-rev --name-only --no-undefined --always HEAD) 2>/dev/null
+	git_where=$(command git name-rev --name-only --no-undefined --always HEAD) 2>/dev/null
+
+	# Remove cruft from branchname
+	branch=${git_where#refs\/heads\/}
+
+	[[ $base_url == *bitbucket* ]] && tree="src" || tree="tree"
+	url="$base_url/$tree/$branch$relative_path"
+
+
+	echo "Calling $(type open) for $url"
+
+	open "$url" &> /dev/null || (echo "Using $(type open) to open URL failed." && exit 1);
+}

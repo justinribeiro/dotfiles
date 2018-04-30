@@ -1,0 +1,21 @@
+#!/bin/sh
+
+alias g=git
+
+# python3 first choice
+alias python=python3
+alias pip=pip3
+
+# apt
+alias agi='sudo apt install'
+alias agr='sudo apt remove'
+alias agar='sudo apt autoremove'
+alias aguu='sudo apt update && sudo apt upgrade -y'
+
+alias zshconfig="vim ~/.zshrc"
+alias i3config="vim ~/.i3/config"
+alias i3statusconfig="vim ~/.i3status.conf"
+alias peek='sxiv'
+alias files='nautilus --no-desktop&'
+alias webcam="guvcview"
+alias webcamconfig="guvcview -z"

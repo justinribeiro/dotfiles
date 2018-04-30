@@ -1,0 +1,133 @@
+#
+# Docker Functions
+#
+
+dcleanup(){
+	docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null
+	docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
+}
+
+del_stopped(){
+	local name=$1
+	local state=$(docker inspect --format "{{.State.Running}}" $name 2>/dev/null)
+
+	if [[ "$state" == "false" ]]; then
+		docker rm $name
+	fi
+}
+
+relies_on(){
+	local containers=$@
+
+	for container in $containers; do
+		local state=$(docker inspect --format "{{.State.Running}}" $container 2>/dev/null)
+
+		if [[ "$state" == "false" ]] || [[ "$state" == "" ]]; then
+			echo "$container is not running, starting it for you."
+			$container
+		fi
+	done
+}
+
+torch() {
+	docker rm `docker ps --no-trunc -aq`
+}
+
+chrome-headless() {
+  del_stopped chrome-headless
+
+  docker run -d \
+    -p 9222:9222 \
+    --security-opt seccomp=/etc/docker/seccomp/chrome.json \
+    --name chrome-headless \
+    justinribeiro/chrome-headless
+}
+
+rdp(){
+	del_stopped chrome
+
+	# one day remove /etc/hosts bind mount when effing
+	# overlay support inotify, such bullshit
+	docker run -d \
+		--net host \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		-e DISPLAY=unix$DISPLAY \
+		--name rdp \
+		jess/rdesktop
+}
+
+ykman(){
+	del_stopped ykpersonalize
+
+	docker run --rm -it \
+		-v /etc/localtime:/etc/localtime:ro \
+		--device /dev/usb \
+		--device /dev/bus/usb \
+		--name ykman \
+		jess/ykman bash
+}
+ykpersonalize(){
+	del_stopped ykpersonalize
+
+	docker run --rm -it \
+		-v /etc/localtime:/etc/localtime:ro \
+		--device /dev/usb \
+		--device /dev/bus/usb \
+		--name ykpersonalize \
+		jess/ykpersonalize bash
+}
+yubico_piv_tool(){
+	del_stopped yubico-piv-tool
+
+	docker run --rm -it \
+		-v /etc/localtime:/etc/localtime:ro \
+		--device /dev/usb \
+		--device /dev/bus/usb \
+		--name yubico-piv-tool \
+		jess/yubico-piv-tool bash
+}
+alias yubico-piv-tool="yubico_piv_tool"
+
+keypassxc(){
+	del_stopped keypassxc
+
+	docker run -d \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		-v /usr/share/X11/xkb:/usr/share/X11/xkb:ro \
+		-e "DISPLAY=unix${DISPLAY}" \
+		-v /etc/machine-id:/etc/machine-id:ro \
+		-v $HOME/.config/keepassxc:/root/.config/keepassxc \
+		-v $HOME/Documents:/root/Documents \
+		--name keypassxc \
+		jess/keepassxc
+}
+alias keepassxc="keypassxc"
+
+###
+### Awesome sauce by @jpetazzo
+###
+command_not_found_handle () {
+	# Check if there is a container image with that name
+	if ! docker inspect --format '{{ .Author }}' "$1" >&/dev/null ; then
+		echo "$0: $1: command not found"
+		return
+	fi
+
+	# Check that it's really the name of the image, not a prefix
+	if docker inspect --format '{{ .Id }}' "$1" | grep -q "^$1" ; then
+		echo "$0: $1: command not found"
+		return
+	fi
+
+	docker run -ti -u $(whoami) -w "$HOME" \
+		$(env | cut -d= -f1 | awk '{print "-e", $1}') \
+		--device /dev/snd \
+		-v /etc/passwd:/etc/passwd:ro \
+		-v /etc/group:/etc/group:ro \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v /home:/home \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+		"jess/$@"
+}

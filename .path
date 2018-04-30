@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# Usually a seperate mount point
+export WORKSRC=/work/sourcecode/
+
+# Where I generally put things I script
+export PATH=${HOME}/.local/bin:${PATH}
+
+# Add Google Cloud tooling to path
+export PATH=${HOME}/.local/google-cloud-sdk/bin:${PATH}
+
+# Add custom npm packages to path
+export PATH=${HOME}/.local/npm-global/bin:${PATH}
+export N_PREFIX="$HOME/.local/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
+
+# Add yarn packages to path
+PATH=${HOME}/.local/.yarn/bin:${PATH}
+
+# Add golang to path
+export GOROOT=${HOME}/.local/go
+export GOPATH=${HOME}/.local/go/code
+export PATH=${GOROOT}/bin:${GOPATH}/bin:${PATH}
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f "${HOME}/.local/google-cloud-sdk/path.zsh.inc" ]; then
+  source "${HOME}/.local/google-cloud-sdk/path.zsh.inc";
+fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f "${HOME}/.local/google-cloud-sdk/completion.zsh.inc" ]; then
+  source "${HOME}/.local/google-cloud-sdk/completion.zsh.inc";
+fi
+
+# Lighthouse command completion
+if [ -f "${WORKSRC}/lighthouse-autocompletion/lighthouse.plugin.zsh" ]; then
+  source "${WORKSRC}/lighthouse-autocompletion/lighthouse.plugin.zsh";
+fi
