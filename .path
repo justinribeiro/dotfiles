@@ -9,6 +9,10 @@ export PATH=${HOME}/.local/bin:${PATH}
 # Add Google Cloud tooling to path
 export PATH=${HOME}/.local/google-cloud-sdk/bin:${PATH}
 
+# Add Chromium depot_tools
+export PATH=${WORKSRC}/depot_tools:${PATH}
+fpath=(${WORKSRC}/depot_tools/zsh-goodies $fpath)
+
 # Add custom npm packages to path
 export PATH=${HOME}/.local/npm-global/bin:${PATH}
 export N_PREFIX="$HOME/.local/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
