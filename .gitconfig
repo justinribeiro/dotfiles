@@ -1,29 +1,33 @@
 [user]
-  email = justin@justinribeiro.com
-  name = Justin Ribeiro
+	email = justin@justinribeiro.com
+	name = Justin Ribeiro
+	signingkey = 41B66DDDB70753AB
 
 [alias]
-  branch-name = "!git rev-parse --abbrev-ref HEAD"
-  a = "add"
-  aa = "add --all"
+	branch-name = "!git rev-parse --abbrev-ref HEAD"
+	a = "add"
+	aa = "add --all"
 	c = "commit -v"
+	cm = "commit -v -m"
+	caa = "commit -a --amend -C HEAD"
 	undo = "!git reset HEAD~1 --mixed"
-	gp = "!git push -u origin $(git branch-name)"
-	rb = "!git rebase -i `git merge-base master HEAD`"
+	pub = "!git push -u origin $(git branch-name)"
+	rbm = "!git rebase -i master"
 	cl = "clone --recursive"
-	cb = "checkout -b"
-  co = "checkout"
-	cm = "checkout master"
-	cd = "checkout develop"
-	up = "pull --rebase -v"
+	co = "checkout"
+	cob = "checkout -b"
+	com = "checkout master"
+	cod = "checkout develop"
+	pur = "pull --rebase -v"
+	compur = "!git checkout master && git pull --rebase -v"
 	bsup = "!git branch --set-upstream-to=origin/$(git branch-name)"
-	sb = "status -sb"
+	sb = "status -sb --show-stash"
 	sta = "stash save"
 	stp = "stash pop"
 	stc = "stash clear"
 	sts = "stash show --text"
-  pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
-  pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+	pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+	pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
 	pristine = "!git reset --hard && git clean -dfx"
 
 	# via Rob: https://gist.github.com/robmiller/6018582
@@ -31,6 +35,9 @@
 
 	# via Jessie: https://github.com/jessfraz/dotfiles/blob/master/.gitconfig
 	graph = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
+
+[status]
+	showStash = true
 
 [apply]
 	# Detect whitespace errors when applying a patch
@@ -40,7 +47,7 @@
 	editor = vim
 
 [commit]
-  gpgsign = true
+	gpgsign = true
 
 [gpg]
 	program = gpg2
