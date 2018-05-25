@@ -11,6 +11,7 @@ plugins=(
   history
   systemd
   extract
+  zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-navigation-tools
   history-substring-search
