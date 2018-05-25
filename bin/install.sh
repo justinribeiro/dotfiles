@@ -121,6 +121,11 @@ base_min() {
 	apt -y upgrade
 
 	apt install -y \
+		autoconf \
+		yodl \
+		libncursesw5-dev \
+		texinfo \
+		checkinstall \
 		adduser \
 		automake \
 		bc \
@@ -164,15 +169,11 @@ base_min() {
 		xz-utils \
 		zip \
 		vim \
-		zsh \
-		zsh-common \
 		--no-install-recommends
 
 	apt autoremove
 	apt autoclean
 	apt clean
-
-	install_scripts
 }
 
 # installs base packages
@@ -293,6 +294,7 @@ install_golang() {
 	go get github.com/google/gops
 	go get github.com/hyleung/docker-stats
 	go get github.com/GoogleChrome/simplehttp2server
+	go get github.com/odeke-em/drive/cmd/drive
 
 	)
 }
@@ -352,6 +354,56 @@ install_web_tooling() {
 	yarn global add bower
 }
 
+# adapted slightly from
+# https://gist.github.com/m45t3r/9790552
+install_zsh() {
+	# Clone zsh repo and change to it
+	git clone git://git.code.sf.net/p/zsh/code zsh
+	cd zsh
+
+	# Get lastest stable version, but you can change to any valid branch/tag/commit id
+	BRANCH=$(git describe --abbrev=0 --tags)
+	# Get version number, and revision/commit id when this is available
+	ZSH_VERSION=$(echo $BRANCH | cut -d '-' -f2,3,4)
+	# Go to desired branch
+	git checkout $BRANCH
+
+	# Make configure
+	./Util/preconfig
+
+	# Options from Ubuntu Zsh package rules file (http://launchpad.net/ubuntu/+source/zsh)
+	# Updated to zsh 5.0.2 on Trusty Tahr (pre-release)
+	./configure --prefix=/usr \
+							--mandir=/usr/share/man \
+							--bindir=/bin \
+							--infodir=/usr/share/info \
+							--enable-maildir-support \
+							--enable-max-jobtable-size=256 \
+							--enable-etcdir=/etc/zsh \
+							--enable-function-subdirs \
+							--enable-site-fndir=/usr/local/share/zsh/site-functions \
+							--enable-fndir=/usr/share/zsh/functions \
+							--with-tcsetpgrp \
+							--with-term-lib="ncursesw tinfo" \
+							--enable-cap \
+							--enable-pcre \
+							--enable-readnullcmd=pager \
+							--enable-custom-patchlevel=Debian \
+							--enable-additional-fpath=/usr/share/zsh/vendor-functions,/usr/share/zsh/vendor-completions \
+							LDFLAGS="-Wl,--as-needed -g -Wl,-Bsymbolic-functions -Wl,-z,relro"
+
+	# Compile, test and install
+	make -j5
+	make check
+	sudo checkinstall -y --pkgname=zsh --pkgversion=$ZSH_VERSION --pkglicense=MIT make install install.info
+
+	# Make zsh the default shell
+	sudo sh -c "echo /bin/zsh >> /etc/shells"
+	chsh -s /bin/zsh
+
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+}
+
 get_dotfiles() {
 	# create subshell
 	(
@@ -373,10 +425,10 @@ usage() {
 	echo "  basemin                             - setup sources & install base min pkgs"
 	echo "  graphics {intel, geforce, optimus}  - install graphics drivers"
 	echo "  wm                                  - install i3 window manager/desktop pkgs"
+	echo "  zsh															    - build zsh and install oh my zsh"
 	echo "  dotfiles                            - get dotfiles"
 	echo "  golang                              - install golang and packages"
 	echo "  node                                - install node and packages"
-	echo "  scripts                             - install scripts"
 }
 
 main() {
@@ -418,8 +470,8 @@ main() {
 		install_golang "$2"
  	elif [[ $cmd == "node" ]]; then
 		install_node
-	elif [[ $cmd == "scripts" ]]; then
-		install_scripts
+	elif [[ $cmd == "zsh" ]]; then
+		install_zsh
 	else
 		usage
 	fi
