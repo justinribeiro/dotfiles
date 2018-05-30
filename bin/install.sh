@@ -102,7 +102,7 @@ setup_sources() {
 	curl https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
 
 	# Signal Desktop
-	echo "deb [arch=amd64] https://updates.signal.org/desktop/apt $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list.d/signal.list
+	echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee -a /etc/apt/sources.list.d/signal.list
 	curl -s https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
 
 	# i3 (TODO eventually sway and machine specific)
@@ -191,7 +191,8 @@ base() {
 		google-cloud-sdk \
 		network-manager \
 		code \
-		google-chrome \
+		google-chrome-stable \
+		google-chrome-beta \
 		firefox \
 		signal-desktop \
 		shutter \
@@ -303,15 +304,15 @@ install_golang() {
 # and adds necessary items to boot params
 install_docker() {
 	# create docker group
-	sudo groupadd docker
-	sudo gpasswd -a "$TARGET_USER" docker
+	#sudo groupadd docker
+	#sudo gpasswd -a "$TARGET_USER" docker
 
 	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 	sudo add-apt-repository \
 		"deb [arch=amd64] https://download.docker.com/linux/ubuntu \
 		$(lsb_release -cs) \
-		stable"
+		nightly"
 
 	sudo apt update
 	sudo apt install docker-ce
@@ -410,11 +411,11 @@ get_dotfiles() {
 	cd "$HOME"
 
 	# install dotfiles from repo
-	git clone git@github.com:justinribeiro/dotfiles.git "${HOME}/dotfiles"
+	git clone https://github.com/justinribeiro/dotfiles.git "${HOME}/dotfiles"
 	cd "${HOME}/dotfiles"
 
 	# installs all the things
-	make
+	#make
 	)
 }
 
@@ -472,6 +473,8 @@ main() {
 		install_node
 	elif [[ $cmd == "zsh" ]]; then
 		install_zsh
+	elif [[ $cmd == "docker" ]]; then
+		install_docker
 	else
 		usage
 	fi
