@@ -48,4 +48,5 @@ local __reduced_y=$(_calc "${__screen_y}/${__block_size}")
 i3lock $* -i <(import -screen -window root -silent png:- | convert png:- -scale '!'"${__reduced_x}x${__reduced_y}" -scale '!'"${__screen_x}x${__screen_y}" png:-)
 
 # standby
-/home/justinribeiro/.local/bin/display.sh standby
+#/home/justinribeiro/.local/bin/display.sh standby
+systemctl suspend

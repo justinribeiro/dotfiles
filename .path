@@ -18,11 +18,11 @@ export PATH=${HOME}/.local/npm-global/bin:${PATH}
 export N_PREFIX="$HOME/.local/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
 
 # Add yarn packages to path
-PATH=${HOME}/.local/.yarn/bin:${PATH}
+PATH=${HOME}/.yarn/bin:${PATH}
 
 # Add golang to path
-export GOROOT=${HOME}/.local/go
-export GOPATH=${HOME}/.local/go/code
+export GOROOT=/usr/local/go/
+export GOPATH="${HOME}/.go"
 export PATH=${GOROOT}/bin:${GOPATH}/bin:${PATH}
 
 # The next line updates PATH for the Google Cloud SDK.
