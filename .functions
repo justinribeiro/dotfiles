@@ -1,3 +1,5 @@
+#!/bin/sh
+
 gpg-agent-start() {
   # Enable gpg-agent if it is not running-
   # --use-standard-socket will work from version 2 upwards
@@ -19,6 +21,18 @@ gpg-agent-start() {
 gpg-agent-restart() {
   gpgconf --kill gpg-agent
   gpg-agent-start
+}
+
+# easier gifs for this
+# requires tmpd() in this file
+# requires https://github.com/lolilolicon/FFcast
+capture-gif() {
+  tmpd
+  area=$(ffcast -sq)
+  eval `ffcast -g $area dump | sed '/.*rect_/!d;s///'`
+  ffcast -g $area rec -r 20 %04d.png
+  convert -loop 0 -delay 5 *.png -layers Optimize output.gif
+  sxiv -a output.gif
 }
 
 generateEddystoneUID() {

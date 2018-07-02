@@ -20,7 +20,7 @@
             "swallows": [
                {
                  "class": "^Google\\-chrome$",
-                 "instance": "^inbox\\.google\\.com$"
+                 "instance": "^mail\\.google\\.com$"
                }
             ],
             "type": "con"
@@ -60,7 +60,7 @@
             "swallows": [
                {
                  "class": "^Google\\-chrome$",
-                 "instance": "^inbox\\.google\\.com$"
+                 "instance": "^mail\\.google\\.com$"
                }
             ],
             "type": "con"
