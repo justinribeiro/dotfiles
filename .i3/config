@@ -169,6 +169,7 @@ bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
 
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym $mod+p exec xrandr-toggle
 
 bindsym --release Print exec "shutter -f"
 bindsym --release $mod+Print exec "shutter -s"

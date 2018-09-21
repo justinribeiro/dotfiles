@@ -4,7 +4,7 @@ alias g=git
 
 # python3 first choice
 alias python=python3
-alias pip=pip3
+#alias pip=pip3
 
 # apt
 alias agi='sudo apt install'
