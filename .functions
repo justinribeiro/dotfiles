@@ -26,13 +26,24 @@ gpg-agent-restart() {
 # easier gifs for this
 # requires tmpd() in this file
 # requires https://github.com/lolilolicon/FFcast
-capture-gif() {
+# $ caoture-film this-is-my-filename
+capture-film() {
+  wd=`pwd`
   tmpd
   area=$(ffcast -sq)
   eval `ffcast -g $area dump | sed '/.*rect_/!d;s///'`
   ffcast -g $area rec -r 20 %04d.png
-  convert -loop 0 -delay 5 *.png -layers Optimize output.gif
-  sxiv -a output.gif
+  convert -loop 0 -delay 5 *.png -layers Optimize $wd/$1.gif
+  ffmpeg -i %04d.png -r 30 $wd/$1.mp4
+  cd $wd
+  xdg-open $1.mp4
+}
+
+# renames the current selected i3wm workspace
+# requires jq
+i3rename() {
+  ws=`i3-msg -t get_workspaces | jq -r '.[] | select(.focused==true).name'`
+  eval i3-msg 'rename workspace ${ws} to "${ws}: $1"'
 }
 
 generateEddystoneUID() {
@@ -152,8 +163,8 @@ repo() {
 
 	# Validate that this folder is a git folder
 	if ! git branch 2>/dev/null 1>&2 ; then
-		echo "Not a git repo!"
-		exit $?
+					echo "Not a git repo!"
+					exit $?
 	fi
 
 	# Find current directory relative to .git parent
@@ -163,7 +174,7 @@ repo() {
 
 	# If filename argument is present, append it
 	if [ "$1" ]; then
-		relative_path="$relative_path/$1"
+					relative_path="$relative_path/$1"
 	fi
 
 	# Figure out current git branch
@@ -177,7 +188,7 @@ repo() {
 	url="$base_url/$tree/$branch$relative_path"
 
 
-	echo "Calling $(type open) for $url"
+	echo "Calling $(type xdg-open) for $url"
 
-	open "$url" &> /dev/null || (echo "Using $(type open) to open URL failed." && exit 1);
+	xdg-open "$url" &> /dev/null || (echo "Using xdg-open to open URL failed." && exit 1);
 }

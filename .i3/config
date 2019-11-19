@@ -133,10 +133,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 1 px or 1 ppt
-        bindsym k resize grow height 1 px or 1 ppt
-        bindsym l resize shrink height 1 px or 1 ppt
-        bindsym semicolon resize grow width 1 px or 1 ppt
+        bindsym h resize shrink width 1 px or 1 ppt
+        bindsym j resize grow height 1 px or 1 ppt
+        bindsym k resize shrink height 1 px or 1 ppt
+        bindsym l resize grow width 1 px or 1 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 5 px or 5 ppt
@@ -163,9 +163,9 @@ bindsym button4 move left
 bindsym button5 move right
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -5%
+bindsym XF86AudioMute exec pactl set-sink-mute alsa_output.pci-0000_00_1b.0.analog-stereo toggle
 
 bindsym --release Print exec "shutter -f"
 bindsym --release $mod+Print exec "shutter -s"
@@ -178,10 +178,11 @@ bar {
   status_command i3status
 }
 
-#exec --no-startup-id compton --config $HOME/.config/compton.conf
+exec --no-startup-id compton --config $HOME/.config/compton.conf
 #exec --no-startup-id nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0{ ForceFullCompositionPipeline = On }"
 
 exec_always --no-startup-id "xrandr --output DP-0 --mode 4096x2160"
 exec_always --no-startup-id "feh --bg-scale ~/Pictures/bg.jpg"
 exec xmodmap ~/.Xmodmap
 exec xhost local:root
+

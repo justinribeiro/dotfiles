@@ -1,6 +1,54 @@
 #!/bin/sh
 
+i3-msg "workspace 2; append_layout .i3/workspace-2.json"
+
+google-chrome --profile-directory='Default' https://music.google.com
+google-chrome --profile-directory='Default' https://feedly.com/
+google-chrome --profile-directory='Default' https://github.com/
+google-chrome --profile-directory='Default'
+google-chrome --profile-directory='Default' https://pinafore.social/
+
 i3-msg "workspace 3; append_layout .i3/workspace-3.json"
+
+google-chrome --profile-directory='Default'
+code
+i3-sensible-terminal
+i3-sensible-terminal
+i3-sensible-terminal
+
+i3-msg "workspace 4; append_layout .i3/workspace-3.json"
+
+google-chrome --profile-directory='Default'
+code
+i3-sensible-terminal
+i3-sensible-terminal
+i3-sensible-terminal
+
+i3-msg "workspace 5; append_layout .i3/workspace-3.json"
+
+google-chrome --profile-directory='Default'
+code
+i3-sensible-terminal
+i3-sensible-terminal
+i3-sensible-terminal
+
+i3-msg "workspace 6; append_layout .i3/workspace-3.json"
+
+google-chrome --profile-directory='Default'
+code
+i3-sensible-terminal
+i3-sensible-terminal
+i3-sensible-terminal
+
+i3-msg "workspace 7; append_layout .i3/workspace-3.json"
+
+google-chrome --profile-directory='Default'
+code
+i3-sensible-terminal
+i3-sensible-terminal
+i3-sensible-terminal
+
+i3-msg "workspace 8; append_layout .i3/workspace-3.json"
 
 google-chrome --profile-directory='Default'
 code

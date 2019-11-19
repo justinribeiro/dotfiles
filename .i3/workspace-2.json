@@ -1,0 +1,118 @@
+{
+    "border": "pixel",
+    "current_border_width": 1,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 2134,
+       "width": 1363,
+       "x": 2742,
+       "y": 11
+    },
+    "name": "Google Play Music - Google Chrome",
+    "percent": 0.216666666666667,
+    "swallows": [
+       {
+       "class": "^Google\\-chrome$",
+       "instance": "^google\\-chrome$",
+       "title": "^Google\\ Play\\ Music\\ \\-\\ Google\\ Chrome$",
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "pixel",
+    "current_border_width": 1,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 2134,
+       "width": 4094,
+       "x": 11,
+       "y": 11
+    },
+    "name": "Today / Me - Google Chrome",
+    "percent": 0.323333333333333,
+    "swallows": [
+       {
+       "class": "^Google\\-chrome$",
+       "instance": "^google\\-chrome$",
+       "title": "^Today\\ \\/\\ Me\\ \\-\\ Google\\ Chrome$",
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.323333333333333,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 2134,
+               "width": 2046,
+               "x": 2059,
+               "y": 11
+            },
+            "name": "New Tab - Google Chrome",
+            "percent": 0.333333333333333,
+            "swallows": [
+               {
+               "class": "^Google\\-chrome$",
+               "instance": "^google\\-chrome$",
+               "title": "^New\\ Tab\\ \\-\\ Google\\ Chrome$",
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "pixel",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 2134,
+               "width": 1322,
+               "x": 2223,
+               "y": 11
+            },
+            "name": "GitHub - Google Chrome",
+            "percent": 0.333333333333333,
+            "swallows": [
+               {
+               "class": "^Google\\-chrome$",
+               "instance": "^google\\-chrome$",
+               "title": "^GitHub\\ \\-\\ Google\\ Chrome$",
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
+{
+    "border": "pixel",
+    "current_border_width": 1,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 2134,
+       "width": 1363,
+       "x": 2742,
+       "y": 11
+    },
+    "name": "ribeiro.social · Home - Google Chrome",
+    "percent": 0.136666666666666,
+    "swallows": [
+       {
+       "class": "^Google\\-chrome$",
+       "instance": "^google\\-chrome$",
+       "title": "^ribeiro\\.social\\ ·\\ Home\\ \\-\\ Google\\ Chrome$",
+       }
+    ],
+    "type": "con"
+}
+
