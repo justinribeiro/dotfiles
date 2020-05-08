@@ -1,7 +1,7 @@
 [user]
 	email = justin@justinribeiro.com
 	name = Justin Ribeiro
-	signingkey = 41B66DDDB70753AB
+	signingkey = 977FFBA5AA2B3A83 
 
 [alias]
 	branch-name = "!git rev-parse --abbrev-ref HEAD"
@@ -11,6 +11,7 @@
 	cm = "commit -v -m"
 	caa = "commit -a --amend -C HEAD"
 	undo = "!git reset HEAD~1 --mixed"
+	pat = "push origin --tags"
 	pub = "!git push -u origin $(git branch-name)"
 	rbm = "!git rebase -i master"
 	cl = "clone --recursive"
@@ -18,8 +19,10 @@
 	cob = "checkout -b"
 	com = "checkout master"
 	cod = "checkout develop"
+	cp = "cherry-pick"
 	pur = "pull --rebase -v"
 	compur = "!git checkout master && git pull --rebase -v"
+	devpur = "!git checkout develop && git pull --rebase -v"
 	bsup = "!git branch --set-upstream-to=origin/$(git branch-name)"
 	sb = "status -sb --show-stash"
 	sta = "stash save"
@@ -29,12 +32,16 @@
 	pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
 	pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
 	pristine = "!git reset --hard && git clean -dfx"
-
 	# via Rob: https://gist.github.com/robmiller/6018582
 	delete-merged-branches = "!git co master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
-
 	# via Jessie: https://github.com/jessfraz/dotfiles/blob/master/.gitconfig
 	graph = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
+	lg = log --color --decorate --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an (%G?)>%Creset' --abbrev-commit
+	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+	amend = commit --amend --reuse-message=HEAD
+	credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
+	contributors = shortlog --summary --numbered
+	unstage = reset HEAD --
 
 [status]
 	showStash = true
@@ -45,6 +52,7 @@
 
 [core]
 	editor = vim
+	pager = diff-so-fancy | less --tabs=4 -RFX
 
 [commit]
 	gpgsign = true
@@ -76,3 +84,22 @@
 
 [url "git://gist.github.com/"]
 	insteadOf = "gist:"
+
+[protocol]
+	version = 2
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[fetch]
+	writeCommitGraph = true

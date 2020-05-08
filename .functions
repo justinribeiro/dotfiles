@@ -21,6 +21,28 @@ gpg-agent-restart() {
   gpg-agent-start
 }
 
+# easier gifs for this
+# requires tmpd() in this file
+# requires https://github.com/lolilolicon/FFcast
+# $ caoture-film this-is-my-filename
+capture-film() {
+  wd=`pwd`
+  ffcast -s % ffmpeg -f x11grab -r 60 -s %wx%h -i %D+%x,%y -f alsa -ac 2 -i hw:0 -vcodec libx264 -preset ultrafast -crf 22 -threads 0 $wd/$1.mp4
+  cd $wd
+  xdg-open $1.mp4
+}
+
+# renames the current selected i3wm workspace
+# requires jq
+i3rename() {
+  ws=`i3-msg -t get_workspaces | jq -r '.[] | select(.focused==true).name'`
+  eval i3-msg 'rename workspace ${ws} to "${ws}: $1"'
+}
+
+nightlyTag() {
+    echo $1-alpha.$(date +%Y%m%d).$(($(date +%s%N)/1000000))
+}
+
 generateEddystoneUID() {
   echo -n $1 | sha256sum | cut -b-10 | tr -d \\n | xxd -pu | xargs -I{} printf '%s%s' {} `od -vAn -N6 -tx2 < /dev/urandom | tr -d ' '`
 }
@@ -163,7 +185,15 @@ repo() {
 	url="$base_url/$tree/$branch$relative_path"
 
 
-	echo "Calling $(type open) for $url"
+	echo "Calling $(type xdg-open) for $url"
 
-	open "$url" &> /dev/null || (echo "Using $(type open) to open URL failed." && exit 1);
+	xdg-open "$url" &> /dev/null || (echo "Using $(type xdg-open) to open URL failed." && exit 1);
 }
+
+lh-stable() {
+    docker run -itv /work/src/web-perf/reports:/home/chrome/reports --security-opt seccomp=$HOME/chrome.json justinribeiro/lighthouse lighthouse --no-enable-error-reporting --chrome-flags="--headless --disable-gpu" $@
+}
+lh-next() {
+    docker run -itv /work/src/web-perf/reports:/home/chrome/reports --security-opt seccomp=$HOME/chrome.json justinribeiro/lighthouse:next lighthouse --no-enable-error-reporting --chrome-flags="--headless --disable-gpu" $@
+}
+
