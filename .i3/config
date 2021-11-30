@@ -11,7 +11,9 @@ set $mod Mod4
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Source Code Pro 12 
+font pango:Source Code Pro 13 
+#font pango:Source Code Pro 16 
+
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -39,7 +41,8 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+space exec dmenu_run -i -b -p 'Start: ' -fn 'Source Code Pro:bold:pixelsize=32' -nb '#fdf6e3' -nf '#222222' -sf '#eeeeee' -sb '#96ca33'
+# bindsym $mod+space exec dmenu_run -i -b -p 'Start: ' -fn 'Source Code Pro:bold:pixelsize=32' -nb '#fdf6e3' -nf '#222222' -sf '#eeeeee' -sb '#96ca33'
+bindsym $mod+space exec --no-startup-id ~/.config/rofi/bin/launcher_text
 
 # text snippet replacement
 bindsym $mod+Mod1+space exec "$bin/snippy.sh"
@@ -150,6 +153,7 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+bindsym $mod+Ctrl+r resize set 1920 1080
 
 
 # The middle button and a modifer over any part of the window kills the window
@@ -163,24 +167,31 @@ bindsym button4 move left
 bindsym button5 move right
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym $mod+p exec xrandr-toggle
 
+
+# screenshots and what not
 bindsym --release Print exec "shutter -f"
 bindsym --release $mod+Print exec "shutter -s"
 bindsym --release $mod+Shift+Print exec "shutter -r"
 
+# lock the screen
+bindsym --release $mod+Ctrl+Shift+l exec "i3lock-fancy -gp"
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)   status_command i3status
-
 bar {
   status_command i3status
 }
+
+# float these windows
+for_window [class="KeePassXC" instance="keepassxc"] floating enable
 
 #exec --no-startup-id compton --config $HOME/.config/compton.conf
 #exec --no-startup-id nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0{ ForceFullCompositionPipeline = On }"
@@ -190,5 +201,6 @@ exec_always --no-startup-id "feh --bg-scale ~/Pictures/bg.jpg"
 exec xmodmap ~/.Xmodmap
 exec xhost local:root
 exec --no-startup-id nm-applet
-
-
+exec --no-startup-id dunst
+exec --no-startup-id keepassxc
+exec --no-startup-id parcellite

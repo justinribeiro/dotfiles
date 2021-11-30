@@ -19,3 +19,4 @@ alias peek='sxiv'
 alias files='nautilus --no-desktop&'
 alias webcam="guvcview"
 alias webcamconfig="guvcview -z"
+alias webcam-headless="guvcview -d /dev/video2 --control_panel"

@@ -358,6 +358,9 @@ autocmd BufNewFile,BufRead *.py setlocal tabstop=4 softtabstop=4 shiftwidth=4 te
 " toml settings
 au BufRead,BufNewFile MAINTAINERS set ft=toml
 
+" rofi settings 
+au BufNewFile,BufRead /*.rasi setf css
+
 " spell check for git commits
 autocmd FileType gitcommit setlocal spell
 

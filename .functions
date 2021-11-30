@@ -24,7 +24,7 @@ gpg-agent-restart() {
 # easier gifs for this
 # requires tmpd() in this file
 # requires https://github.com/lolilolicon/FFcast
-# $ caoture-film this-is-my-filename
+# $ capture-film this-is-my-filename
 capture-film() {
   wd=`pwd`
   ffcast -s % ffmpeg -f x11grab -r 60 -s %wx%h -i %D+%x,%y -f alsa -ac 2 -i hw:0 -vcodec libx264 -preset ultrafast -crf 22 -threads 0 $wd/$1.mp4
@@ -41,6 +41,18 @@ i3rename() {
 
 nightlyTag() {
     echo $1-alpha.$(date +%Y%m%d).$(($(date +%s%N)/1000000))
+}
+
+yarnPubCanaryVersion() {
+    if [ -z "$1" ]
+    then
+        echo "No version argument supplied, maybe you meant v1.0.0?"
+        return 1
+    fi    
+    version=`nightlyTag $1`
+    yarn version --new-version $version --no-git-tag-version
+    npm publish --tag canary
+    git sweep
 }
 
 generateEddystoneUID() {
@@ -90,7 +102,7 @@ screenrec-fullscreen() {
 
 # top left for i3 on 50/50 50/50 split
 screenrec-quarter() {
-  ffmpeg -video_size 2048x1080 -framerate 120 -f x11grab -i :0.0 -c:v libx264 -qp 0 -preset ultrafast $HOME/Documents/google-drive/me/screenrecording/$@.mkv
+  ffmpeg -video_size 1920x1080 -framerate 60 -f x11grab -i :0.0 -f alsa -ac 2 -i hw:0 -c:v libx264 -qp 0 -preset ultrafast $HOME/Videos/screen-recordings/$@.mkv
 }
 
 # Open image nicely in feh
@@ -193,7 +205,28 @@ repo() {
 lh-stable() {
     docker run -itv /work/src/web-perf/reports:/home/chrome/reports --security-opt seccomp=$HOME/chrome.json justinribeiro/lighthouse lighthouse --no-enable-error-reporting --chrome-flags="--headless --disable-gpu" $@
 }
+
 lh-next() {
     docker run -itv /work/src/web-perf/reports:/home/chrome/reports --security-opt seccomp=$HOME/chrome.json justinribeiro/lighthouse:next lighthouse --no-enable-error-reporting --chrome-flags="--headless --disable-gpu" $@
+}
+
+# key reference check after keyboard binding the whitefox
+kb-test() {
+    xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'
+}
+
+# connect to the intranet at Case for doctoral research
+cwru-vpn-start() {
+    ~/.local/cwruvpn/64bit/forticlientsslvpn_cli --server vpn2.case.edu:443 --vpnuser $CWRU_USER 
+}
+
+monitor-swap-home() {
+  xrandr --output eDP1 --off --output HDMI2 --auto
+  xrandr --output HDMI2 --mode 3840x2160 --primary
+} 
+
+png2ico () {
+    local i="${1}" o="${2:-${1:r}.ico}" s="${png2ico_size:-256}"
+    convert -resize x${s} -gravity center -crop ${s}x${s}+0+0 "$i" -flatten -colors 256 -background transparent "$o"
 }
 

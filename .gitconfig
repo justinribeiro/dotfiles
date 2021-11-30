@@ -17,12 +17,9 @@
 	cl = "clone --recursive"
 	co = "checkout"
 	cob = "checkout -b"
-	com = "checkout master"
-	cod = "checkout develop"
 	cp = "cherry-pick"
 	pur = "pull --rebase -v"
-	compur = "!git checkout master && git pull --rebase -v"
-	devpur = "!git checkout develop && git pull --rebase -v"
+	
 	bsup = "!git branch --set-upstream-to=origin/$(git branch-name)"
 	sb = "status -sb --show-stash"
 	sta = "stash save"
@@ -31,12 +28,19 @@
 	sts = "stash show --text"
 	pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
 	pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+	sweep = "!git reset --hard HEAD"
 	pristine = "!git reset --hard && git clean -dfx"
 	# via Rob: https://gist.github.com/robmiller/6018582
 	delete-merged-branches = "!git co master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+	
 	# via Jessie: https://github.com/jessfraz/dotfiles/blob/master/.gitconfig
 	graph = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
 	lg = log --color --decorate --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an (%G?)>%Creset' --abbrev-commit
+	l = log --pretty=oneline -n 20 --graph --abbrev-commit
+	tags = tag -l		
+	branches = branch -a
+	remotes = remote -v
+
 	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 	amend = commit --amend --reuse-message=HEAD
 	credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
@@ -51,23 +55,38 @@
 	whitespace = fix
 
 [core]
+	# Treat spaces before tabs and all kinds of trailing whitespace as an error
+	# [default] trailing-space: looks for spaces at the end of a line
+	# [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+	
 	editor = vim
 	pager = diff-so-fancy | less --tabs=4 -RFX
 
 [commit]
 	gpgsign = true
 
+[pull]
+	rebase = true
+
 [gpg]
 	program = gpg2
 
 [merge]
 	tool = kdiff3
+	
+	# Include summaries of merged commits in newly created merge commit messages
+	log = true
 
 [diff]
 	guitool = kdiff3
 
 [difftool "kdiff3"]
 	trustExitCode = false
+
+[help]
+	# Automatically correct and execute mistyped commands
+	autocorrect = 1
 
 [url "git@github.com:"]
 	pushInsteadOf = https://github.com/
@@ -103,3 +122,5 @@
 	whitespace = red reverse
 [fetch]
 	writeCommitGraph = true
+[init]
+	defaultBranch = main
