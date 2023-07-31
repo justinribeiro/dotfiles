@@ -4,6 +4,7 @@
 
 set $bin /usr/local/bin
 set $mod Mod4
+#:set $mod1 Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -25,9 +26,13 @@ font pango:Source Code Pro 13
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-new_window pixel 1
 bindsym $mod+x border toggle
 bindsym $mod+t border normal 1
+
+default_border pixel 1
+default_floating_border pixel 1
+for_window [class="^.*"] border pixel 1
+
 
 client.focused          #4c7899 #47e51f #ffffff #2e9ef4
 client.focused_inactive #333333 #5f676a #ffffff #484e50
@@ -45,7 +50,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+space exec --no-startup-id ~/.config/rofi/bin/launcher_text
 
 # text snippet replacement
-bindsym $mod+Mod1+space exec "$bin/snippy.sh"
+bindsym $mod+Mod1+space exec "snippy" 
 
 # change focus
 bindsym $mod+h focus left
@@ -182,7 +187,7 @@ bindsym --release $mod+Print exec "shutter -s"
 bindsym --release $mod+Shift+Print exec "shutter -r"
 
 # lock the screen
-bindsym --release $mod+Ctrl+Shift+l exec "i3lock-fancy -gp"
+bindsym $mod+Ctrl+Shift+l exec "i3lock-fancy -gp"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)   status_command i3status

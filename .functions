@@ -32,6 +32,17 @@ capture-film() {
   xdg-open $1.mp4
 }
 
+# easier gifs for this
+# requires tmpd() in this file
+# requires https://github.com/lolilolicon/FFcast
+# $ capture-film this-is-my-filename
+capture-silent-film() {
+  wd=`pwd`
+  ffcast -s % ffmpeg -f x11grab -r 60 -s %wx%h -i %D+%x,%y -vcodec libx264 -preset ultrafast -crf 22 -threads 0 $wd/$1.mp4
+  cd $wd
+  xdg-open $1.mp4
+}
+
 # renames the current selected i3wm workspace
 # requires jq
 i3rename() {
@@ -229,4 +240,6 @@ png2ico () {
     local i="${1}" o="${2:-${1:r}.ico}" s="${png2ico_size:-256}"
     convert -resize x${s} -gravity center -crop ${s}x${s}+0+0 "$i" -flatten -colors 256 -background transparent "$o"
 }
+
+
 

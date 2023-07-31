@@ -88,22 +88,6 @@
 	# Automatically correct and execute mistyped commands
 	autocorrect = 1
 
-[url "git@github.com:"]
-	pushInsteadOf = https://github.com/
-	pushInsteadOf = "github:"
-	pushInsteadOf = "git://github.com/"
-
-[url "git://github.com/"]
-	insteadOf = "github:"
-
-[url "git@gist.github.com:"]
-	insteadOf = "gst:"
-	pushInsteadOf = "gist:"
-	pushInsteadOf = "git://gist.github.com/"
-
-[url "git://gist.github.com/"]
-	insteadOf = "gist:"
-
 [protocol]
 	version = 2
 [color]
@@ -124,3 +108,7 @@
 	writeCommitGraph = true
 [init]
 	defaultBranch = main
+[url "https://github.com/"]
+	insteadOf = git://github.com/
+[url "git@github.com:"]
+	insteadOf = github://github.com/
